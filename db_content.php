@@ -3,7 +3,6 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 include 'db_connect.php';
 
-// Connect to the database
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name, $db_port);
 
 if ($mysqli->connect_error) {
@@ -19,7 +18,7 @@ if ($result && $result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
       $data[] = $row;
   }
-  echo json_encode($data); // Output JSON
+  echo json_encode($data); 
 } else {
     echo json_encode(["message" => "No results found."]);
 }

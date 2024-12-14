@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS catastrophe;
 CREATE TABLE IF NOT EXISTS products (
-  Product_ID INT NOT NULL,
+  Product_ID VARCHAR(255) NOT NULL,
   Product_Name VARCHAR(255),
   Product_Category ENUM('Cat', 'Food', 'Toy', 'Others'),
   Image_File VARCHAR(255),
