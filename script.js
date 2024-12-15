@@ -6,6 +6,9 @@ async function loadItems(category) {
   console.log(data);
   data.forEach(item => {
     if (item.Product_Category == category || category == '*'){
+      const buttonElement = document.createElement('button');
+      buttonElement.setAttribute("onclick", `editForm("${item.Product_ID}", "${item.Product_Name}","${item.Image_File}","${item.Product_Price}","${item.Quantity}")`);
+      buttonElement.classList.add('content-item');
       const cardElement = document.createElement('div');
       cardElement.classList.add('card');
       const itemElement = document.createElement('div');
@@ -19,7 +22,8 @@ async function loadItems(category) {
         <p style='font-size:20px'>$${item.Product_Price}</p>
         <p>Qty: ${item.Quantity}</p>
       `;
-      cardElement.appendChild(itemElement);
+      buttonElement.appendChild(itemElement);
+      cardElement.appendChild(buttonElement);
       contentContainer.appendChild(cardElement);
     }
   });
@@ -71,6 +75,54 @@ async function addItem() {
   window.location.replace("index.php");
 }
 
+async function editItem() {
+  const file = document.getElementById('edit_file').value;
+  const name = document.getElementById('edit_name').value;
+  const price = document.getElementById('edit_price').value;
+  const quantity = document.getElementById('edit_qty').value;
+  const id = document.getElementById('edit_id').value;
+
+  console.log(file);
+  console.log(name);
+  console.log(price);
+  console.log(quantity);
+  const response = await fetch("db_editItem.php", { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: id,
+      file: file,
+      name: name, 
+      price: price,
+      quantity: quantity,
+    })
+  });
+
+  const data = await response.json();
+  console.log(data);
+  window.location.replace("index.php");
+}
+
+async function deleteItem() {
+  const id = document.getElementById('edit_id').value;
+
+  const response = await fetch("db_deleteItem.php", { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: id,
+    })
+  });
+
+  const data = await response.json();
+  console.log(data);
+  window.location.replace("index.php");
+}
+
 function addForm () {
   const popup = document.getElementById("addForm");
   popup.style.display = 'block';
@@ -78,6 +130,39 @@ function addForm () {
 
 function closeAddForm() {
   const popup = document.getElementById("addForm");
+  popup.style.display = 'none';
+}
+
+function editForm(id, name, img, price, qty) {
+  const popup = document.getElementById("editForm");
+  popup.style.display = 'block';
+  popup.innerHTML = `
+      <div class="form-container"> 
+        <div class="close-container"> 
+          <button class="close-button" onclick="closeEditForm()">X</button>
+        </div>
+        <form class="form"> 
+          <div class="form-group">
+            <label>Image File Name</label><br>
+            <input id="edit_file" type='text' placeholder="Enter image file name" value="${img}"><br>
+            <label>Product Name</label><br>
+            <input id="edit_name" type='text' placeholder="Enter product name" value="${name}"><br>
+            <label>Price</label><br>
+            <input id="edit_price" type='number' step=".01" value="${price}">
+            <label>Quantity</label><br>
+            <input id="edit_qty" type='number' value="${qty}">
+            <input id="edit_id" type='text' value="${id}" hidden>
+          </div>
+        </form>
+        <button class="form-submit-btn" onclick="editItem()">Submit</button>
+        <button class="form-delete-btn" onclick="deleteItem()">Delete Entry</button>
+      </div>
+  `;
+}
+
+function closeEditForm() {
+  const popup = document.getElementById("editForm");
+  popup.innerHTML = ``;
   popup.style.display = 'none';
 }
 window.onload = loadItems('*');

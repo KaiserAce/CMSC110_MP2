@@ -257,9 +257,35 @@ body {
   border-radius: 6px;
 }
 
+.form-container .form-delete-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  font-family: inherit;
+  color: white;
+  font-weight: 600;
+  width: 40%;
+  background: red;
+  border: 1px solid white;
+  padding: 12px 16px;
+  font-size: inherit;
+  gap: 8px;
+  margin-top: 8px;
+  margin-left: 30%;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
 .form-container .form-submit-btn:hover {
   background-color: #fff;
   border-color: #fff;
+}
+
+.form-container .form-delete-btn:hover {
+  background-color: #fff;
+  border-color: red;
+  color: red;
 }
 
 .form-container .close-container {
@@ -278,7 +304,8 @@ body {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  border: none; }
+  border: none; 
+}
 
 
 
