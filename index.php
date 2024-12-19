@@ -7,24 +7,24 @@
   <body> 
     <div class="header"> 
       <div class="logo"> 
-        <p>CATASTROPHE</p>
+        <p>catastrophe</p>
       </div>
 
       <div class="input"> 
         <button class="value" onclick="loadItems('*')" checked> 
           <p>All</p>
         </button>
-        <button class="value" onclick="loadItems('Cat')"> 
-          <p>Cats</p>
-        </button>
         <button class="value" onclick="loadItems('Food')"> 
           <p>Food</p>
         </button>
-        <button class="value" onclick="loadItems('Toy')"> 
-          <p>Toys</p>
+        <button class="value" onclick="loadItems('Litter')"> 
+          <p>Litter</p>
         </button>
-        <button class="value" onclick="loadItems('Others')"> 
-          <p>Others</p>
+        <button class="value" onclick="loadItems('Furniture')"> 
+          <p>Furniture</p>
+        </button>
+        <button class="value" onclick="loadItems('Bowls')"> 
+          <p>Bowls</p>
         </button>
       </div>
     </div>
@@ -44,10 +44,10 @@
             <input id="add_name" type='text' placeholder="Enter product name"><br>
             <label for="color">Product Category</label>
             <select id="add_category" name="color">
-              <option value="Cat">Cat</option>
               <option value="Food">Food</option>
-              <option value="Toy">Toy</option>
-              <option value="Others">Others</option>
+              <option value="Litter">Litter</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Bowls">Bowls</option>
             </select>
             <label>Price</label><br>
             <input id="add_price" type='number' step=".01">
